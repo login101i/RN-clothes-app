@@ -1,47 +1,46 @@
-import React from 'react'
+import React from "react";
+import { View, StyleSheet, Image } from "react-native";
 
-import { View, StyleSheet, Image, Text } from 'react-native'
+import Text from "./Text";
+import colors from "../config/colors";
 
-import AppText from '../components/AppText'
-import colors from '../config/colors'
-import ListItem from './ListItem'
-
-export default function Card({ title, subTitle, image }) {
-    return (
-        <View style={styles.card}>
-            <Image style={styles.image} source={image} />
-            <View style={styles.detailsContainer}>
-
-                <AppText style={styles.title}>{title}</AppText>
-                <AppText style={styles.subtitle}>{subTitle}</AppText>
-            </View>
-            <ListItem
-            image={require("../assets/me.jpg")}
-            title="Maciej Kruszyniak"
-            subTitle="4 rzeczy"
-            />
-        </View>
-    )
+function Card({ title, subTitle, image }) {
+  return (
+    <View style={styles.card}>
+      <Image style={styles.image} source={image} />
+      <View style={styles.detailsContainer}>
+        <Text style={styles.title} numberOfLines={1}>
+          {title}
+        </Text>
+        <Text style={styles.subTitle} numberOfLines={2}>
+          {subTitle}
+        </Text>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    card: {
-        borderRadius: 15,
-        backgroundColor: colors.white,
-        overflow:"hidden"
-    },
-    detailsContainer: {
-        padding: 10,
-    },
-    title: {
-        marginBottom: 7
-    },
-    image: {
-        width: '100%',
-        height: 200
-    },
-    subtitle:{
-        color:colors.medium,
-        fontWeight:'bold'
-    }
-})
+  card: {
+    borderRadius: 15,
+    backgroundColor: colors.white,
+    marginBottom: 20,
+    overflow: "hidden",
+  },
+  detailsContainer: {
+    padding: 20,
+  },
+  image: {
+    width: "100%",
+    height: 200,
+  },
+  subTitle: {
+    color: colors.secondary,
+    fontWeight: "bold",
+  },
+  title: {
+    marginBottom: 7,
+  },
+});
+
+export default Card;
