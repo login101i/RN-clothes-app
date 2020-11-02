@@ -1,15 +1,15 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-import colors from '../config/colors'
+import defaultStyles from '../config/styles'
 
-export default function AppText({ title, subTitle, colorek = "black" }) {
+export default function AppText({ title, subTitle, colorek = "black", flexx, widthh}) {
     return (
         <>
             <View style={styles.container}>
                 {title && <Text
-                  style={[styles.text, { textTransform: 'uppercase' }]}>{title}</Text> }
-                {subTitle &&<Text style={[styles.subtitleText, {color:colors[colorek]}]}>{subTitle}</Text>}
+                    style={[defaultStyles.text,{width:widthh},{ textTransform: 'uppercase' }]}>{title}</Text>}
+                {subTitle && <Text style={[styles.subtitleText, { color: defaultStyles.colors[colorek] }]}>{subTitle}</Text>}
 
             </View>
         </>
@@ -18,15 +18,12 @@ export default function AppText({ title, subTitle, colorek = "black" }) {
 
 const styles = StyleSheet.create({
     container: {
-        padding:5
+        padding: 5,
+        flexDirection:'row'
     },
-    text: {
-        color: colors.black,
+
+    subtitleText: {
+        fontWeight: '200',
         fontSize: 18,
-        fontWeight:"bold"
     },
-    subtitleText:{
-        fontWeight:'200',
-        fontSize: 18,
-    }
 })

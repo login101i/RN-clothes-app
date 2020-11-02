@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import WelcomeScreen from './app/screens/WelcomeScreen'
 import ViewImageScreen from './app/screens/ViewImageScreen'
@@ -15,21 +15,50 @@ import Screen from './app/screens/Screen'
 import Icon from './app/components/Icon'
 import AccountScreen from './app/screens/AccountScreen'
 import ListingScreen from "./app/screens/ListingScreen";
+import AppTextInput from './app/components/AppTextInput'
+import AppPicker from './app/components/AppPicker'
+import LoginScreen from './app/screens/LoginScreen'
 
+
+const categories = [
+  { label: "Odzież", value: 1 },
+  { label: "Telefony", value: 2 },
+  { label: "Napoje", value: 3 }
+]
 
 export default function App() {
+  const [category, setCategory] = useState("Kategoria")
+
+
   return (
     <>
       {/* <WelcomeScreen /> */}
-      <ListingScreen/>
+      {/* <ListingScreen/> */}
+      <Screen>
+        <LoginScreen />
+        {/* <AppTextInput
+        placeholder="user"
+        icon="email"
+        color="green"
+      />
+      <AppPicker
+    
+      onSelectItem={item=>setCategory(item)}
+      title={category}
+      icon="apps"
+      color="red"
+      items={categories}
 
-     
-        {/* <MessagesScreen /> */}
+      /> */}
+      </Screen>
 
-        {/* <AccountScreen 
+
+      {/* <MessagesScreen /> */}
+
+      {/* <AccountScreen 
         backgroundColor='white'
         /> */}
-       
+
 
 
       {/* <ViewImageScreen /> */}
