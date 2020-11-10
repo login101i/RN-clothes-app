@@ -18,6 +18,9 @@ import ListingScreen from "./app/screens/ListingScreen";
 import AppTextInput from './app/components/AppTextInput'
 import AppPicker from './app/components/AppPicker'
 import LoginScreen from './app/screens/LoginScreen'
+import ListingEditScreen from './app/screens/ListingEditScreen'
+import ListItem from './app/components/ListItem'
+
 
 
 const categories = [
@@ -35,21 +38,21 @@ export default function App() {
       {/* <WelcomeScreen /> */}
       {/* <ListingScreen/> */}
       <Screen>
-        <LoginScreen />
+        {/* <LoginScreen /> */}
+        <ListingEditScreen />
+        {/* <MessagesScreen/> */}
         {/* <AppTextInput
         placeholder="user"
         icon="email"
         color="green"
       />
-      <AppPicker
-    
-      onSelectItem={item=>setCategory(item)}
-      title={category}
-      icon="apps"
-      color="red"
-      items={categories}
-
+      */}
+      {/* <ListItem
+      title=" I gonna never let you down, never gonna let you fell bad."
+          subTitle="Yes its totaly tru, belivie me, belivie me, belivie me, belivie me, belivie me, belivie me, belivie me."
+      image={require('./app/assets/foto4.jpg')}
       /> */}
+      
       </Screen>
 
 

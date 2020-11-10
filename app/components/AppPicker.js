@@ -1,37 +1,41 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput, Platform, Modal, FlatList } from 'react-native'
-
+import { StyleSheet, View, Modal, FlatList } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+
 import colors from '../config/colors'
 import defaultStyles from '../config/styles'
-import AppText from '../components/AppText'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import AppButton from '../components/AppButton'
 import PickerItem from '../components/PickerItem'
-import { onChange } from 'react-native-reanimated'
+import SimpleText from '../components/SimpleText'
 
-export default function AppPicker({ icon, items, color = "#0c0c0c", size = 44, onSelectItem, title }) {
+export default function AppPicker({ icon, items, color = "#0c0c0c", size = 44, onSelectItem, placeholder, PickerItemComponent=PickerItem, selectedItem, width="100%" }) {
     const [modalVisible, setModalVisible] = useState(false)
 
     return (
         <>
             <TouchableWithoutFeedback onPress={() => {
                 setModalVisible(true),
-                console.log('hah')
+                    console.log('hah')
             }}>
-                <View style={styles.container}>
+                <View style={[styles.container,{width}]}>
                     {icon && <MaterialCommunityIcons
                         style={styles.iconka}
                         name={icon}
                         color={color}
                         size={size}
                     />}
-                    <AppText flexx={1} widthh="77%" title={title} />
+                    {selectedItem ? (
+                        <SimpleText style={styles.text}>{selectedItem.label}</SimpleText>
+                    ) : (
+                            <SimpleText style={defaultStyles.colors.grey}>{placeholder}</SimpleText>
+                        )}
                     <MaterialCommunityIcons
 
                         name="chevron-down"
                         color={colors.dark}
                         size={32}
+                        style={styles.arrowDown}
                     />
                 </View>
             </TouchableWithoutFeedback>
@@ -40,11 +44,12 @@ export default function AppPicker({ icon, items, color = "#0c0c0c", size = 44, o
                 <FlatList
                     data={items}
                     keyExtractor={item => item.value.toString()}
-                    renderItem={({ item }) => <PickerItem
+                    renderItem={({ item }) => <PickerItemComponent
+                        
                         title={item.label}
                         onPress={() => {
                             setModalVisible(false)
-                            onSelectItem(item.label)
+                            onSelectItem(item)
                         }}
                     />}
                 />
@@ -54,12 +59,14 @@ export default function AppPicker({ icon, items, color = "#0c0c0c", size = 44, o
 }
 
 const styles = StyleSheet.create({
-
+    arrowDown: {
+        marginLeft:'auto'
+    },
     container: {
         backgroundColor: defaultStyles.colors.lightGrey,
         borderRadius: 25,
         flexDirection: 'row',
-        width: '100%',
+        // width: '100%',
         padding: 10,
         marginVertical: 10,
         alignItems: 'center',
@@ -67,7 +74,14 @@ const styles = StyleSheet.create({
     },
     text: {
         flex: 1,
-        marginLeft: 44
+        marginLeft: 44,
+    },
+    placeholder: {
+        color: defaultStyles.colors.purple,
+        flex: 1,
+    },
+    iconka: {
+        marginRight: 10
     }
 
 

@@ -1,101 +1,81 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
-import { Formik } from 'formik'
+import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native'
+
+
+import {AppFormField, AppForm, SubmitButton} from '../components/forms'
+
+
 import * as Yup from 'yup'
 
-import AppTextInput from '../components/AppTextInput'
-import AppButton from '../components/AppButton'
-import Screen from '../screens/Screen'
-import AppText from '../components/AppText'
-import SimpleText from '../components/SimpleText'
-import ErrorMessage from '../components/ErrorMessage'
-import AppFormField from '../components/AppFormField'
 
 const validationSchema = Yup.object().shape({
-    email: Yup.string().required().email().label("Email Koleżko"),
-    password: Yup.string().required().min(4).label("Hasełko")
+    email: Yup.string().required().label('Twój emajl'),
+    password: Yup.string().min(5).required().label("Twoje hasełko")
 })
 
 export default function LoginScreen() {
 
-    return (
-        <Screen>
 
-            <View style={styles.container}>
-                <Image source={require('../assets/favicon.jpg')}
-                    style={styles.logo}
+    return (
+        <View>
+
+
+            <Image
+                style={styles.logo}
+                resizeMode='contain'
+                source={require("../assets/logo.png")} />
+
+            <AppForm
+                initialValues={{ email: '', password: '' }}
+                onSubmit={values => console.log(values)}
+                validationSchema={validationSchema}
+            >
+                <AppFormField
+                    icon="email"
+                    name="email"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    placeholder="Twój email"
+                    textContentType='emailAddress'
+                    keyboardType="email-address"
+
+                />
+                <AppFormField
+                    icon="lock"
+                    name="password"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    placeholder="Twoje hasło"
+                    textContentType='password'
+                    secureTextEntry
                 />
 
-                <Formik
-                    initialValues={{ email: '', password: '' }}
-                    onSubmit={values => console.log(values)}
-                    validationSchema={validationSchema}
-                >
-                    {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
-                        <>
-                            <AppTextInput
-                                icon='email'
-                                placeholder="email"
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                textContentType="emailAddress"
-                                onBlur={() => setFieldTouched('email')}
-
-
-                                onChangeText={handleChange('email')}
-                            />
-                            <ErrorMessage error={errors.email} visible={touched.email} />
-
-                            <AppFormField/>
+                <SubmitButton
+                    title='Zaloguj'
+                    color="black"
+                    textColor="white"
+                />
+            </AppForm>
 
 
 
 
-                            <AppTextInput
-                                icon='lock'
-                                placeholder="password"
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                textContentType="password"
-                                secureTextEntry
-                                onBlur={() => setFieldTouched('password')}
-
-
-                                onChangeText={handleChange('password')}
-
-                            />
-                            <ErrorMessage error={errors.password}  visible={touched.password}/>
-
-                            <AppButton
-                                title="Zaloguj się"
-                                color="black"
-                                textColor="white"
-                                onPress={handleSubmit}
-                            />
-
-                        </>
-                    )}
-                </Formik>
-
-
-
-
-            </View>
-        </Screen>
+        </View >
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center'
+    background: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        paddingHorizontal: 30
     },
     logo: {
-        width: 80,
-        height: 80,
-        borderRadius: 20,
-        marginBottom: 50,
+        width: 300,
 
-
+        alignSelf: 'center',
+        marginTop: 50
 
     }
 })

@@ -11,6 +11,8 @@ import AppText from '../components/AppText'
 import colors from '../config/colors'
 import { render } from 'react-dom'
 
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+
 
 export default function ListItem({ title, subTitle, image, IconComponent, onPress, renderRightActions, textColor }) {
     return (
@@ -28,13 +30,20 @@ export default function ListItem({ title, subTitle, image, IconComponent, onPres
                         <View style={styles.name}>
                             <AppText
                                 title={title}
-                                />
+                                numberOfLines={1}
+                            />
                         </View>
                         <AppText
                             subTitle={subTitle}
                             colorek={textColor}
+                            numberOfLines={3}
                         />
                     </View>
+                    <MaterialCommunityIcons
+                        name="chevron-right"
+                        color="black"
+                        size={22}
+                    />
                 </View>
             </TouchableHighlight>
         </Swipeable>
@@ -46,7 +55,8 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        alignItems:'center'
     },
     image: {
         width: 60,
@@ -60,7 +70,9 @@ const styles = StyleSheet.create({
     nameDetails: {
 
         marginLeft: 10,
- 
+        flex:1,
+        
+
 
     }
 })
