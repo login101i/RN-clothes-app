@@ -4,10 +4,10 @@ import { TouchableOpacity } from 'react-native'
 
 import AppText from '../components/AppText'
 
-export default function PickerItem({ title, onPress }) {
+export default function PickerItem({ item, onPress }) {
     return (
         <TouchableOpacity onPress={onPress}>
-            <AppText title={title} />
+            <AppText title={item.label} />
         </TouchableOpacity>
     )
 }

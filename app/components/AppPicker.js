@@ -9,7 +9,8 @@ import AppButton from '../components/AppButton'
 import PickerItem from '../components/PickerItem'
 import SimpleText from '../components/SimpleText'
 
-export default function AppPicker({ icon, items, color = "#0c0c0c", size = 44, onSelectItem, placeholder, PickerItemComponent=PickerItem, selectedItem, width="100%" }) {
+
+export default function AppPicker({ icon, items, color = "#0c0c0c", size = 44, numColumns=1, onSelectItem, placeholder, PickerItemComponent = PickerItem, selectedItem, width = "100%" }) {
     const [modalVisible, setModalVisible] = useState(false)
 
     return (
@@ -18,7 +19,7 @@ export default function AppPicker({ icon, items, color = "#0c0c0c", size = 44, o
                 setModalVisible(true),
                     console.log('hah')
             }}>
-                <View style={[styles.container,{width}]}>
+                <View style={[styles.container, { width }]}>
                     {icon && <MaterialCommunityIcons
                         style={styles.iconka}
                         name={icon}
@@ -43,15 +44,17 @@ export default function AppPicker({ icon, items, color = "#0c0c0c", size = 44, o
                 <AppButton title="zamknij" onPress={() => setModalVisible(false)} />
                 <FlatList
                     data={items}
+                    numColumns={numColumns}
                     keyExtractor={item => item.value.toString()}
-                    renderItem={({ item }) => <PickerItemComponent
-                        
+                    renderItem={({ item }) => (
+                    <PickerItemComponent
+                        item={item}
                         title={item.label}
                         onPress={() => {
                             setModalVisible(false)
                             onSelectItem(item)
                         }}
-                    />}
+                    />)}
                 />
             </Modal>
         </>
@@ -60,7 +63,7 @@ export default function AppPicker({ icon, items, color = "#0c0c0c", size = 44, o
 
 const styles = StyleSheet.create({
     arrowDown: {
-        marginLeft:'auto'
+        marginLeft: 'auto'
     },
     container: {
         backgroundColor: defaultStyles.colors.lightGrey,

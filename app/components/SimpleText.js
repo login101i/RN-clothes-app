@@ -3,10 +3,10 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import defaultStyles from '../config/styles'
 
-export default function SimpleText({ children, style }) {
+export default function SimpleText({ children, txtColor }) {
     return (
         <View >
-            <Text style={[defaultStyles.text, { color: style }]}>{children}</Text>
+            <Text style={[defaultStyles.text, { color: txtColor }]}>{children}</Text>
         </View>
     )
 }

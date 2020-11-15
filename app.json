@@ -1,10 +1,9 @@
 {
   "expo": {
-    "name": "DoneWithIt",
-    "slug": "DoneWithIt",
-    "version": "1.0.0",
+    "name": "React_Native_Clothes_Store",
+    "slug": "React_Native_Clothes_Store",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./app/assets/icon.png",
     "splash": {
       "image": "./app/assets/splash.png",
       "resizeMode": "contain",
@@ -21,6 +20,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.jpg"
-    }
+    },
+    "description": ""
   }
 }

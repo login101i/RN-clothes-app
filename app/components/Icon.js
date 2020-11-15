@@ -3,14 +3,28 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-export default function Icon({ name, color, size=40 }) {
+export default function Icon({ name, color, size = 40, backgroundColor = "#fff",
+}) {
     return (
 
-        <View style={styles.container}>
+        <View style={styles.container}
+            style={{
+                width: size,
+                height: size,
+                borderRadius: size / 2,
+                backgroundColor,
+                justifyContent: "center",
+                alignItems: "center",
+                borderColor:"grey",
+                borderWidth:3
+              
+            }}
+        >
             <MaterialCommunityIcons
                 name={name}
                 color={color}
-                size={size}
+                size={size*0.7}
+            // backgroundColor={backgroundColor}
             />
 
         </View>
@@ -20,15 +34,5 @@ export default function Icon({ name, color, size=40 }) {
 
 const styles = StyleSheet.create({
 
-    container: {
-        height: 60,
-        width: 60,
-        borderRadius: 30,
-        backgroundColor:'#f5f6d4',
-        justifyContent:'center',
-        alignItems:'center',
-        borderWidth:2,
-        borderColor:'purple',
-        opacity:0.8
-    }
+
 })
