@@ -22,13 +22,17 @@ export default function ImageInput({ imageUri, onChangeImage }) {
     const handlePress = async () => {
 
         if (!imageUri) selectImage()
-        else Alert.alert('Na pewno chcesz usunąć?', 'Powiedz, że nie', [{ text: "Nie", style: 'destructive' },
+        else Alert.alert('Na pewno chcesz usunąć?', 'Powiedz, że nie', [
+            { text: "Nie", style: 'destructive' },
         { text: 'Tak', onPress: () => onChangeImage(null) }
         ])
     }
 
     const selectImage = async () => {
-        const result = await ImagePicker.launchImageLibraryAsync()
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes:ImagePicker.MediaTypeOptions.Images,
+            quality:0.5
+        })
         if (!result.cancelled) onChangeImage(result.uri)
     }
 
@@ -55,7 +59,8 @@ const styles = StyleSheet.create({
         height: 100,
         width: 100,
         overflow: 'hidden',
-        elevation: 21,
+        // elevation: 21,
+     
     },
     image: {
         height: '100%',

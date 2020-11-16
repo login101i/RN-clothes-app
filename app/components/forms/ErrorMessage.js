@@ -7,7 +7,7 @@ export default function ErrorMessage({error, visible}) {
     if(!visible|| !error) return null
     return (
         <View>
-            <SimpleText style="red">{error}</SimpleText>
+            <SimpleText txtColor="red">{error}</SimpleText>
 
         </View>
     )

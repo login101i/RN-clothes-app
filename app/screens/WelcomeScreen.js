@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import colors from '../config/colors'
 import AppButton from '../components/AppButton'
 
-export default function WelcomeScreens() {
+export default function WelcomeScreens({navigation}) {
     return (
         <ImageBackground
             style={styles.background}
@@ -16,11 +16,15 @@ export default function WelcomeScreens() {
             <View style={styles.buttonsContainer}>
                 <AppButton
                     title="login"
-                    color='white'/>
+                    color='white'
+                    onPress={()=>navigation.navigate("Login")}
+                    />
                 <AppButton 
                 title="register" 
                 color="black"
                 textColor='white'
+                    onPress={() => navigation.navigate("Account")}
+
                 />
             </View>
         </ImageBackground>

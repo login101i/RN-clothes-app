@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 
@@ -8,12 +8,16 @@ import {
 } from '../components/forms'
 import CategoryPickerItem from '../components/CategoryPickerItem'
 import ImageInput from '../components/ImageInput'
+import FormImagePicker from '../components/forms/FormImagePicker'
+import {useLocation} from '../hooks/useLocation'
+
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label(),
     price: Yup.number().required().min(1).max(10000).label('cena'),
     description: Yup.string().label('opis'),
-    category: Yup.object().required().nullable().label("Kategoria")
+    category: Yup.object().required().nullable().label("Kategoria"),
+    images: Yup.array().min(1, "Wybierz minimum jeden obraz")
 })
 
 const categories = [
@@ -75,23 +79,29 @@ const categories = [
 
 
 
-export default function ListingEditScreen({imageUri, onChangeImage}) {
+export default function ListingEditScreen({ imageUris, onChangeImage }) {
 
-    
+    // const location = useLocation()
+
+
 
     return (
         <View>
-            <ImageInput imageUri={imageUri} onChangeImage={onChangeImage}/>
+
+
+
             <AppForm
                 initialValues={{
                     title: '',
                     price: '',
                     description: '',
-                    category: null
+                    category: null,
+                    images: []
                 }}
-                onSubmit={values => console.log(values)}
+                onSubmit={values => console.log(location)}
                 validationSchema={validationSchema}
             >
+                <FormImagePicker name="images" />
                 <AppFormField
                     name="title"
                     icon='box'
@@ -121,7 +131,7 @@ export default function ListingEditScreen({imageUri, onChangeImage}) {
                     placeholder="Kategoria"
                     icon="apps"
                     width={250}
-                    />
+                />
                 <AppFormField
                     name="description"
                     autoCapitalize
@@ -138,7 +148,7 @@ export default function ListingEditScreen({imageUri, onChangeImage}) {
                     textColor="white"
                 />
             </AppForm>
-        
+
         </View>
     )
 }

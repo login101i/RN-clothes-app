@@ -6,7 +6,7 @@ import ImageViewer from 'react-native-image-zoom-viewer'
 import AppText from '../components/AppText'
 import colors from '../config/colors'
 
-export default function Card({ title, subTitle, image }) {
+export default function Card({ title, subTitle, image, onPress}) {
 
     const [showImage, setShowImage] = useState(false)
 
@@ -17,7 +17,7 @@ export default function Card({ title, subTitle, image }) {
 
     return (
         <>
-            <TouchableWithoutFeedback onPress={() => setShowImage(true)}>
+            <TouchableWithoutFeedback onPress={onPress}>
 
                 <View style={styles.card}>
                     <Image source={image}
@@ -30,9 +30,9 @@ export default function Card({ title, subTitle, image }) {
                     </View>
                 </View>
             </TouchableWithoutFeedback>
-            <Modal visible={showImage} transparent={true} >
+            {/* <Modal visible={showImage} transparent={true} >
                 <ImageViewer imageUrls={images} onClick={() => setShowImage(false)} pageAnimateTime={40}/>
-            </Modal>
+            </Modal> */}
         </>
     )
 }

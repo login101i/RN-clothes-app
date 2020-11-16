@@ -22,12 +22,13 @@ const items = [
         icon: {
             name: 'email',
             color: 'purple'
-        }
+        },
+        targetScreen: "Messages"
     }
 ]
 
 
-export default function AccountScreen({ backgroundColor }) {
+export default function AccountScreen({ backgroundColor, navigation }) {
     return (
         <>
             <Screen style={styles.screen}>
@@ -51,10 +52,12 @@ export default function AccountScreen({ backgroundColor }) {
                         renderItem={({ item }) =>
                             <ListItem
                                 title={item.title}
-                                IconComponent={<Icon
+                                IconComponent={
+                                <Icon
                                     name={item.icon.name}
                                     color={item.icon.color}
                                 />}
+                                onPress={()=>navigation.navigate(item.targetScreen)}    
                             />
                         }
                         ItemSeparatorComponent={LIstItemSeparator}

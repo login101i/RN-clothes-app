@@ -12,8 +12,6 @@ export default function AppFormPicker({ items, color, icon, name, numColumns, pl
     return (
         <View>
             <AppPicker
-
-
                 items={items}
                 numColumns={numColumns}
                 onSelectItem={(item) => setFieldValue(name, item)}
