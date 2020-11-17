@@ -9,8 +9,14 @@ const Stack = createStackNavigator()
 const FeedNavigator = () => (
     <Stack.Navigator
     // mode="modal"   Modal nie działa tzn przesuanie palcem 
+    screenOptions={{
+        headerShown:false
+    }}
+
     >
-        <Stack.Screen name="Listings" component={ListingScreen} />
+        <Stack.Screen name="Listings" component={ListingScreen}
+        
+        />
         <Stack.Screen
          name="ListingDetails"
          component={ListingsDetailScreen} 

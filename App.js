@@ -121,8 +121,8 @@ export default function App() {
   return (
     <>
       <NavigationContainer theme={navigationTheme}>
-        {/* <AuthkNavigator /> */}
-        <AppNavigator />
+        <AuthkNavigator />
+        {/* <AppNavigator /> */}
       </NavigationContainer>
     </>
 

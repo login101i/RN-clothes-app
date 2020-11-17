@@ -6,6 +6,7 @@ import ListItem from '../components/ListItem'
 import colors from '../config/colors'
 import Screen from '../screens/Screen'
 import LIstItemSeparator from '../components/ListItemSeparator'
+import routes from '../navigation/Routes'
 
 const items = [
     {
@@ -23,7 +24,7 @@ const items = [
             name: 'email',
             color: 'purple'
         },
-        targetScreen: "Messages"
+        targetScreen: routes.MESSAGES
     }
 ]
 
