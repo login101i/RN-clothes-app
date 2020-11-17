@@ -6,13 +6,12 @@ import ImageViewer from 'react-native-image-zoom-viewer'
 import AppText from '../components/AppText'
 import colors from '../config/colors'
 
-export default function Card({ title, subTitle, image, onPress}) {
+export default function Card({ title, subTitle, imageUrl, onPress}) {
 
     const [showImage, setShowImage] = useState(false)
 
     const images = [{
         url: 'https://i.pinimg.com/564x/8a/5b/db/8a5bdb6815645fdc25919753dce156d0.jpg',
-
     }]
 
     return (
@@ -20,7 +19,7 @@ export default function Card({ title, subTitle, image, onPress}) {
             <TouchableWithoutFeedback onPress={onPress}>
 
                 <View style={styles.card}>
-                    <Image source={image}
+                    <Image source={{uri:imageUrl}}
                         style={styles.image} />
                     <View style={styles.detailContainer}>
                         <AppText

@@ -1,15 +1,20 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-
-
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, Keyboard} from 'react-native'
 import * as Yup from 'yup'
+
+
+
+
 import {
     AppForm, AppFormField, AppFormPicker, SubmitButton
 } from '../components/forms'
 import CategoryPickerItem from '../components/CategoryPickerItem'
 import ImageInput from '../components/ImageInput'
 import FormImagePicker from '../components/forms/FormImagePicker'
-import {useLocation} from '../hooks/useLocation'
+import { useLocation } from '../hooks/useLocation'
+import listingApi from '../api/listings'
+import UploadScreen from './UploadScreen'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 
 const validationSchema = Yup.object().shape({
@@ -82,74 +87,104 @@ const categories = [
 export default function ListingEditScreen({ imageUris, onChangeImage }) {
 
     // const location = useLocation()
+    const [uploadVisible, setUploadVisible] = useState(false)
+    const [progress, setProgress] = useState(0)
+
+    const handleSubmit = async (listing, { resetForm }) => {
+        setProgress(0)
+        setUploadVisible(true)
+        const result = await listingApi.addListing({
+            ...listing,
+            // location
+        },
+            progress => setProgress(progress)
+        )
+
+
+
+        if (!result.ok) {
+            setUploadVisible(false),
+                alert('Nie mogę tego zachować');
+        }
+        resetForm()
+    }
 
 
 
     return (
-        <View>
+        <>
+            <UploadScreen
+                onDone={() => setUploadVisible(false)}
+                progress={progress}
+                visible={uploadVisible} />
 
 
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 
-            <AppForm
-                initialValues={{
-                    title: '',
-                    price: '',
-                    description: '',
-                    category: null,
-                    images: []
-                }}
-                onSubmit={values => console.log(location)}
-                validationSchema={validationSchema}
-            >
-                <FormImagePicker name="images" />
-                <AppFormField
-                    name="title"
-                    icon='box'
-                    autoCapitalize
-                    autoCorrect={true}
+                <View>
 
-                    placeholder="Nazwa produktu"
+                    <AppForm
+                        initialValues={{
+                            title: '',
+                            price: '',
+                            description: '',
+                            category: null,
+                            images: []
+                        }}
+                        onSubmit={handleSubmit}
+                        validationSchema={validationSchema}
+                    >
+                        <FormImagePicker name="images" />
+                        <AppFormField
+                            name="title"
+                            icon='box'
+                            autoCapitalize
+                            autoCorrect={true}
 
-                />
+                            placeholder="Nazwa produktu"
 
-                <AppFormField
-                    name="price"
-                    icon='coin'
-                    autoCapitalize
-                    autoCorrect={true}
-                    placeholder="cena"
-                    keyboardType='numeric'
-                    maxLenght={8}
-                    width={120}
+                        />
 
-                />
-                <AppFormPicker
-                    name="category"
-                    items={categories}
-                    numColumns={3}
-                    PickerItemComponent={CategoryPickerItem}
-                    placeholder="Kategoria"
-                    icon="apps"
-                    width={250}
-                />
-                <AppFormField
-                    name="description"
-                    autoCapitalize
-                    numberOfLines={3}
-                    autoCorrect={true}
-                    placeholder="Opis"
-                    multiline
-                    maxLength={222}
-                />
+                        <AppFormField
+                            name="price"
+                            icon='coin'
+                            autoCapitalize
+                            autoCorrect={true}
+                            placeholder="cena"
+                            keyboardType='numeric'
+                            maxLenght={8}
+                            width={120}
 
-                <SubmitButton
-                    title="Dodaj"
-                    color="black"
-                    textColor="white"
-                />
-            </AppForm>
+                        />
+                        <AppFormPicker
+                            name="category"
+                            items={categories}
+                            numColumns={3}
+                            PickerItemComponent={CategoryPickerItem}
+                            placeholder="Kategoria"
+                            icon="apps"
+                            width={250}
+                        />
+                        <AppFormField
+                            name="description"
+                            autoCapitalize
+                            numberOfLines={3}
+                            autoCorrect={true}
+                            placeholder="Opis"
+                            multiline
+                            maxLength={222}
+                        />
 
-        </View>
+                        <SubmitButton
+                            title="Dodaj"
+                            color="black"
+                            textColor="white"
+                        />
+                    </AppForm>
+
+                </View>
+            </TouchableWithoutFeedback>
+        </>
     )
 }
 

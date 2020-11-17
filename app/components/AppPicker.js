@@ -27,9 +27,9 @@ export default function AppPicker({ icon, items, color = "#0c0c0c", size = 44, n
                         size={size}
                     />}
                     {selectedItem ? (
-                        <SimpleText style={styles.text}>{selectedItem.label}</SimpleText>
+                        <SimpleText>{selectedItem.label}</SimpleText>
                     ) : (
-                            <SimpleText style={defaultStyles.colors.grey}>{placeholder}</SimpleText>
+                            <SimpleText txtColor={defaultStyles.colors.grey}>{placeholder}</SimpleText>
                         )}
                     <MaterialCommunityIcons
 

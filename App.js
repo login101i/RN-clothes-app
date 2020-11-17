@@ -12,6 +12,7 @@ import AccountScreen from './app/screens/AccountScreen'
 import AuthkNavigator from "./app/navigation/AuthNavigation";
 import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
 
 
 const Link = () => {
@@ -120,10 +121,13 @@ export default function App() {
 
   return (
     <>
-      <NavigationContainer theme={navigationTheme}>
-        <AuthkNavigator />
-        {/* <AppNavigator /> */}
+      <Screen>
+        <NavigationContainer theme={navigationTheme}>
+        <AppNavigator/>
+
       </NavigationContainer>
+        {/* <ListingEditScreen /> */}
+      </Screen>
     </>
 
   );

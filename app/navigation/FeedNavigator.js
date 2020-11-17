@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import ListingsDetailScreen from '../components/ListingDetailScreen'
+import ListingsDetailScreen from '../screens/ListingDetailScreen'
 import ListingScreen from '../screens/ListingScreen'
 
 
