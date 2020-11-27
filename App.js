@@ -13,6 +13,8 @@ import AuthkNavigator from "./app/navigation/AuthNavigation";
 import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
+import AnimatedLoginScreen from './app/screens/AnimatedLoginScreen'
+
 
 
 const Link = () => {
@@ -39,7 +41,7 @@ const Tweet = ({ navigation }) => (
   </Screen>
 )
 
-const Gówno = () => {
+const ooo = () => {
   <Screen>
     <Text>To jest prawdziwy Szajz</Text>
   </Screen>
@@ -84,7 +86,7 @@ const FeedNavigator = () => (
       component={TweetDetail}
       options={({ route }) => ({ title: route.params.id })}
     />
-    <Stack.Screen name="Gówno" component={Gówno} />
+    <Stack.Screen name="Gówno" component={ooo} />
   </Stack.Navigator>
 )
 // ______________________________
@@ -117,17 +119,14 @@ const TabNavigator = () => (
 
 // __________________________________________________________________
 
+
 export default function App() {
 
   return (
     <>
-      <Screen>
-        <NavigationContainer theme={navigationTheme}>
-        <AppNavigator/>
-
-      </NavigationContainer>
-        {/* <ListingEditScreen /> */}
-      </Screen>
+      <View>
+        <AnimatedLoginScreen/>
+      </View>
     </>
 
   );
