@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native'
 import moment from 'moment'
 
 const prefix = 'cache'
-const expiryInMinutes=5
+const expiryInMinutes = 5
 
 const store = async (key, value) => {
     const item = {
@@ -18,11 +18,11 @@ const store = async (key, value) => {
 
 }
 // _______________________________________________________
-const isExpired=(item)=>{
+const isExpired = (item) => {
     const now = moment(Date.now())
     const storedTime = moment(item.timestamp)
     return now.diff(storedTime, 'minutes') > expiryInMinutes
-    
+
 }
 
 const get = async (key) => {
@@ -30,14 +30,14 @@ const get = async (key) => {
         const value = await AsyncStorage.getItem(prefix + key)
         const item = JSON.parse(value)
 
-        if(!item) return null
+        if (!item) return null
         isExpired(item)
 
         if (isExpired(item)) {
             AsyncStorage.removeItem(prefix + key)
             return null
         }
-        return item.value 
+        return item.value
     }
     catch (error) {
         console.log(error)
@@ -47,3 +47,58 @@ const get = async (key) => {
 export default {
     store
 }
+
+// ___________________________________
+
+// import { AsyncStorage } from 'react-native'
+
+// const store = async (key, valeu) => {
+
+//     item = {
+//         value,
+//         timestamp: Date.now()
+//     }
+
+//     try {
+//         const value = await AsyncStorage.setItem(key, JSON.stringify(item))
+//     }
+//     catch (error) {
+//         console.log(error)
+//     }
+
+// }
+
+// const isExpired = item => {
+
+//     const now = moment(Date.now())
+//     const storedTime = moment(item.timestamp)
+//     return now.diff(storedTime, 'minutes') > 5
+// }
+
+// const get = key => {
+
+//     try {
+//         const value = await AsyncStorage.getItem(key)
+//         const item = JSON.parse(value)
+
+//         if (!item) return null
+//         isExpired(item)
+
+//         if (isExpired(item)) {
+//             AsyncStorage.removeItem(key)
+//             return null
+//         }
+//         return item.value
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+// export default {
+//     store
+// }
+
+
+
+
+

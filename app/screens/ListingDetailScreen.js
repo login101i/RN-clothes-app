@@ -1,46 +1,57 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View} from 'react-native';
 import {Image} from 'react-native-expo-image-cache'
 
-import AppText from '../components/AppText'
+
+import colors from '../config/colors'
 import ListItem from '../components/ListItem'
 
-export default function ListingDetailsScreen({ title, subTitle, route }) {
-
-    const listing=route.params
-
-
+export default function App({route}) {
+    const listing = route.params;
     return (
         <View>
-            <Image 
-            style={styles.image} 
-            uri={listing.images[0].url}
-            preview={{uri:listing.images[0].thumbnailUrl}}
-            tint="light"
+            <Image
+                style={styles.image}
+                preview={{ uri: listing.images[0].thumbnailUrl }}
+                tint="light"
+                uri={listing.images[0].url}
             />
-            <View style={styles.detailContainer}>
-                <AppText
-                    title={listing.title}
-                    subTitle={listing.subTitle}
-                    color="green" />
-                <ListItem
-                    image={require('../assets/favicon.jpg')}
-                    title="Ariana"
-                    subTitle="Novodic"
-                />
+            <View style={styles.detailsContainer}>
+                <Text style={styles.title}>{listing.title}</Text>
+                <Text style={styles.price}>${listing.price}</Text>
+                <View style={styles.userContainer}>
+                    <ListItem
+                        image={require("../assets/wallpaper_butt.jpg")}
+                        title="Mosh Hamedani"
+                        subTitle="5 Listings"
+                    />
+                </View>
             </View>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
-    detailContainer: {
-        padding: 10,
-    
+    detailsContainer: {
+        padding: 20,
     },
     image: {
-        width: '100%',
-        height: 422
-    }
+        width: "100%",
+        height: 300,
+    },
+    price: {
+        color: colors.secondary,
+        fontWeight: "bold",
+        fontSize: 20,
+        marginVertical: 10,
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: "500",
+    },
+    userContainer: {
+        marginVertical: 40,
+    },
+});
 
-})

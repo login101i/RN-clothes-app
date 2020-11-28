@@ -24,7 +24,7 @@ export default function WelcomeScreens({navigation}) {
                 title="register" 
                 color="black"
                 textColor='white'
-                    onPress={() => navigation.navigate(routes.ACCOUNT)}
+                    onPress={() => navigation.navigate(routes.REGISTER)}
 
                 />
             </View>

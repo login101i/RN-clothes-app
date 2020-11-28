@@ -7,7 +7,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable'
 
 
 
-import AppText from '../components/AppText'
+import SimpleText from '../components/SimpleText'
 import colors from '../config/colors'
 import { render } from 'react-dom'
 
@@ -28,12 +28,13 @@ export default function ListItem({ title, subTitle, image, IconComponent, onPres
                     />}
                     <View style={styles.nameDetails}>
                         <View style={styles.name}>
-                            <AppText
+                            <SimpleText
                                 title={title}
                                 numberOfLines={1}
                             />
                         </View>
-                        <AppText
+                        <Text></Text>
+                        <SimpleText
                             subTitle={subTitle}
                             colorek={textColor}
                             numberOfLines={3}

@@ -22,12 +22,14 @@ export default function ListingScreen({ navigation }) {
 
 
     return (
+        <>
+         <ActivityIndicator visible={getListings.loading} />
         <Screen>
             {getListings.error && <>
                 <SimpleText > Nie mogę pobrać danych</SimpleText>
                 <AppButton color='black' textColor="white" title="spróbuj ponownie" onPress={getListings.request} />
             </>}
-            <ActivityIndicator visible={getListings.loading} />
+           
             <FlatList
                 data={getListings.data}
                 keyExtractor={item => item.id.toString()}
@@ -42,7 +44,23 @@ export default function ListingScreen({ navigation }) {
                 }
             />
         </Screen>
+        </>
     )
 }
 
 const styles = StyleSheet.create({})
+
+
+// props thumbnail =item.images[0].thumbnailUrl
+// props imageUri =item.images[0].uri
+
+// import { Image } from 'react-expo-image-case'
+
+// <Image
+// uri={imageUri}
+// preview={{uri:thumbnailUrl}}
+// style={styles.image}
+// tint="light"
+// />
+
+

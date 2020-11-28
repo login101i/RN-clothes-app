@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { AppLoading } from 'expo'
 
 import Screen from './app/screens/Screen'
 import WelcomeScreen from './app/screens/WelcomeScreen'
@@ -15,123 +16,43 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import AnimatedLoginScreen from './app/screens/AnimatedLoginScreen'
 import OfflineNotice from './app/components/OfflineNotice'
+import AuthContext from "./app/auth/context";
+import authStorage from './app/auth/storage'
 
 
 
-const Link = () => {
 
-  const navigation = useNavigation()
-  return (
-    <Screen>
-      <Button
-        title="do szczegółów"
-        onPress={() => navigation.navigate('TweetDetail', { id: 222 })}
-      />
-    </Screen>
-  )
-}
-
-const Tweet = ({ navigation }) => (
-  <Screen>
-    <Text>To jest Tweet</Text>
-    <Button
-      title="Zobacz Tweeta"
-      onPress={() => navigation.navigate("TweetDetail", { id: 111 })}
-    />
-    <Link />
-  </Screen>
-)
-
-const ooo = () => {
-  <Screen>
-    <Text>To jest prawdziwy Szajz</Text>
-  </Screen>
-}
-
-const TweetDetail = ({ navigation, route }) => (
-  <Screen>
-    <Text>To są detale wiadomości</Text>
-    <Text>{route.params.id}</Text>
-    <Button
-      title="powrót"
-      onPress={() => navigation.navigate("Tweet")}
-    />
-  </Screen>
-)
-
-const Account = () => (
-  <Screen>
-    <Text> To Jest Okno Account </Text>
-  </Screen>
-)
-
-// _____________________
-const Stack = createStackNavigator()
-const FeedNavigator = () => (
-  <Stack.Navigator
-    screenOptions={{
-      title: 'Strona główna',
-      headerStyle: { backgroundColor: 'dodgerblue' },
-    }}
-  >
-    <Stack.Screen
-      name="Tweet"
-      component={Tweet}
-      options={{
-        title: 'Strona główna',
-        headerStyle: { backgroundColor: 'red' },
-      }}
-    />
-    <Stack.Screen
-      name="TweetDetail"
-      component={TweetDetail}
-      options={({ route }) => ({ title: route.params.id })}
-    />
-    <Stack.Screen name="Gówno" component={ooo} />
-  </Stack.Navigator>
-)
-// ______________________________
-const Tab = createBottomTabNavigator()
-const TabNavigator = () => (
-  <Tab.Navigator
-    tabBarOptions={{
-      activeBackgroundColor: 'tomato',
-      activeTintColor: 'white',
-      inactiveBackgroundColor: 'dodgerblue',
-      inactiveTintColor: 'white',
-
-    }}
-  >
-    <Tab.Screen
-      name="Feed"
-      component={FeedNavigator}
-      options={{
-        tabBarIcon: ({ size, color }) => <MaterialCommunityIcons
-          name="home"
-          size={size}
-          color={color}
-
-        />
-      }}
-    />
-    <Tab.Screen name="Account" component={Account} />
-  </Tab.Navigator>
-)
-
-// __________________________________________________________________
 
 
 export default function App() {
+  const [user, setUser] = React.useState()
+  const [isReady, setIsReady] = useState(false)
+  console.log(user)
+
+  const restoreUser = async () => {
+    const user = await authStorage.getUser();
+    if (user) setUser(user)
+    
+  }
+
+  // useEffect(() => {
+  //   restoreToken()
+  // }, [])
+
+  if (!isReady) return <AppLoading
+    startAsync={restoreUser}
+    onFinish={() => setIsReady(true)}
+  />
 
   return (
-    <>
+    <AuthContext.Provider value={{ user, setUser }}>
       <Screen>
         <OfflineNotice />
         <NavigationContainer>
-          <AppNavigator />
+          {user ? <AppNavigator /> : <AuthkNavigator />}
         </NavigationContainer>
       </Screen>
-    </>
+    </AuthContext.Provider>
 
   );
 }
