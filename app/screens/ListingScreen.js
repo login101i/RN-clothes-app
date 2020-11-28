@@ -17,9 +17,9 @@ export default function ListingScreen({ navigation }) {
     const getListings = useApi(listingsApi.getListings)
 
     useEffect(() => {
-      getListings.request()
+        getListings.request()
     }, [])
-    
+
 
     return (
         <Screen>
@@ -37,6 +37,7 @@ export default function ListingScreen({ navigation }) {
                         subTitle={item.price + " zł"}
                         imageUrl={item.images[0].url}
                         onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+                        thumbnailUrl={item.images[0].thumbnailUrl}
                     />
                 }
             />

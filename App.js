@@ -14,6 +14,7 @@ import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import AnimatedLoginScreen from './app/screens/AnimatedLoginScreen'
+import OfflineNotice from './app/components/OfflineNotice'
 
 
 
@@ -124,9 +125,12 @@ export default function App() {
 
   return (
     <>
-      <View>
-        <AnimatedLoginScreen/>
-      </View>
+      <Screen>
+        <OfflineNotice />
+        <NavigationContainer>
+          <AppNavigator />
+        </NavigationContainer>
+      </Screen>
     </>
 
   );

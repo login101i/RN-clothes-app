@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image, Modal } from 'react-native'
+import { StyleSheet, Text, View, Modal } from 'react-native'
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import ImageViewer from 'react-native-image-zoom-viewer'
 
 import AppText from '../components/AppText'
 import colors from '../config/colors'
+import { Image } from 'react-native-expo-image-cache'
 
-export default function Card({ title, subTitle, imageUrl, onPress}) {
+export default function Card({ title, subTitle, imageUrl, onPress, thumbnailUrl }) {
 
     const [showImage, setShowImage] = useState(false)
 
@@ -19,8 +20,13 @@ export default function Card({ title, subTitle, imageUrl, onPress}) {
             <TouchableWithoutFeedback onPress={onPress}>
 
                 <View style={styles.card}>
-                    <Image source={{uri:imageUrl}}
-                        style={styles.image} />
+                    <Image
+                        uri={imageUrl}
+                        preview={{ uri: thumbnailUrl }}
+                        style={styles.image}
+                        tint="light"
+                    />
+
                     <View style={styles.detailContainer}>
                         <AppText
                             title={title}

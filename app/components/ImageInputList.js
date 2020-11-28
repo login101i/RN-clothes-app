@@ -2,6 +2,7 @@ import React, {useRef} from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 
 import ImageInput from './ImageInput'
+import Screen from '../screens/Screen'
 
 export default function ImageInputList({ imageUris = [], onRemoveImage, onAddImage }) {
 
@@ -10,7 +11,7 @@ export default function ImageInputList({ imageUris = [], onRemoveImage, onAddIma
     return (
         <View>
         <ScrollView
-        style={{backgroundColor:'green'}}
+     
          horizontal
          ref={scrollView}
          onContentSizeChange={()=>scrollView.current.scrollToEnd()}
